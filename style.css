@@ -1,0 +1,40 @@
+body {
+    font-family: "Roboto", sans-serif;
+    width: 375px;
+}
+
+.entrada {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.entrada>img {
+    width: 130px;
+    margin-bottom: 20px;
+}
+
+.nome {
+    width: 260px;
+    height: 54px;
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.entrar {
+    width: 109px;
+    height: 45px;
+    border-radius: 9px;
+    background-color: #E7E7E7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #696969;
+}
+
+.escondido {
+    display: none;
+}
