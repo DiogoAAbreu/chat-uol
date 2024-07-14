@@ -1,12 +1,21 @@
+const url = 'https://mock-api.driven.com.br/api/v3/uol/'
+
 function entrarNaSala() {
-    const nome = document.querySelector('.nome').value;
-    console.log(nome)
-    const entrar = axios.post('https://mock-api.driven.com.br/api/v3/uol/participants', { name: nome });
-    entrar.then(console.log('Entrou na sala'))
+    const name = document.querySelector('.nome').value;
+    const entrar = axios.post(`${url}participants`, { name });
+    entrar.then(esconderInicial)
     entrar.catch(error => {
-        console.log(error.response.status)
+        if (!name) {
+            const erro = document.querySelector('.erro')
+            erro.classList.remove('escondido')
+        }
     })
 
-
-    const entrada = document.querySelector('.entrada').classList.add('escondido')
 }
+
+function esconderInicial() {
+    const entrada = document.querySelector('.entrada');
+    entrada.classList.add('escondido');
+}
+
+

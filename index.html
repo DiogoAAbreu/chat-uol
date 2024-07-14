@@ -13,11 +13,48 @@
 </head>
 
 <body>
-    <div class="entrada">
+    <div class="entrada escondido">
         <img src="logo.png" alt="">
         <input type="text" placeholder="Digite seu nome" class="nome">
         <div class="entrar" onclick="entrarNaSala()">Entrar</div>
+        <p class="erro escondido">Tente outro nome</p>
     </div>
+
+    <div class="chat">
+        <div class="barra-superior">
+            <img src="logo.png">
+            <ion-icon name="people-sharp"></ion-icon>
+        </div>
+
+        <ul class="messages">
+            <li class="message">
+                <p>
+                    <span class="hora">(09:38:22) </span>
+                    <span class="remetente">diogo</span>
+                    <span class="visibilidade">para</span>
+                    <span class="destinatario">Todos:</span>
+                    <span class="texto">texto</span>
+                </p>
+            </li>
+
+            <li class="message">
+                <p>
+                    <span class="hora">(09:38:22) </span>
+                    <span class="remetente">diogo</span>
+                    <span class="visibilidade">para</span>
+                    <span class="destinatario">Todos:</span>
+                    <span class="texto">texto</span>
+                </p>
+            </li>
+        </ul>
+
+        <div class="enviar-message">
+            <input type="text" placeholder="Escreva aqui...">
+            <ion-icon name="paper-plane-outline"></ion-icon>
+        </div>
+    </div>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="scripts.js"></script>
 </body>

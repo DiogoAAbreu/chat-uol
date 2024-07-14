@@ -3,6 +3,17 @@ body {
     width: 375px;
 }
 
+* {
+    box-sizing: border-box;
+}
+
+.chat {
+    background-color: #f3f3f3;
+    height: 100vh;
+    position: relative;
+    width: 375px;
+}
+
 .entrada {
     display: flex;
     flex-direction: column;
@@ -37,4 +48,82 @@ body {
 
 .escondido {
     display: none;
+}
+
+.entrada p {
+    margin-top: 20px;
+    color: red;
+    font-size: 12px;
+}
+
+.barra-superior {
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 20px;
+    background-color: white;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.barra-superior>img {
+    width: 75px;
+}
+
+.barra-superior>ion-icon {
+    font-size: 45px;
+}
+
+.enviar-message {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    width: 375px;
+    justify-content: space-around;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+}
+
+.enviar-message>input {
+    width: 300px;
+    border: none;
+    height: 80px;
+    font-size: 18px;
+}
+
+.enviar-message>ion-icon {
+    font-size: 26px;
+}
+
+.messages {
+    margin-top: 20px;
+}
+
+.message {
+    background-color: white;
+    font-size: 14px;
+    padding: 15px 5px;
+    display: flex;
+    width: 375px;
+    align-items: center;
+    margin-bottom: 3px;
+}
+
+.remetente,
+.destinatario {
+    font-weight: bold;
+}
+
+.hora {
+    color: #aaaaaa;
+}
+
+.private-message {
+    background-color: #FFDEDE;
+}
+
+.status {
+    background-color: #DCDCDC;
 }
