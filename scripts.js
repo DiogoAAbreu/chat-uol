@@ -1,8 +1,8 @@
 const url = 'https://mock-api.driven.com.br/api/v3/uol/'
 let mensagens;
 let usuario;
-let destinatario;
-let visibilidade;
+let destinatario = 'Todos';
+let tipo = 'message';
 
 function entrarNaSala() {
     usuario = '';
@@ -59,7 +59,7 @@ function renderizarMessages() {
                 <span class="hora">(${time}) </span>
                 <span class="remetente">${from}</span>
                 <span class="visibilidade">Reservadamente para </span>
-                <span class="destinatario">${to}</span>
+                <span class="destinatario">${to}:</span>
                 <span class="texto">${text}</span>
             </p>
         </li>`
@@ -84,9 +84,9 @@ function enviarMensagem() {
     const text = document.querySelector('.enviar-message input');
     const msg = {
         from: usuario,
-        to: "Todos",
+        to: destinatario,
         text: text.value,
-        type: "message",
+        type: tipo,
     }
     axios.post(`${url}messages`, msg).then(lerMensagens).catch(error => {
         window.location.reload()
@@ -102,6 +102,73 @@ function manterConexao() {
     axios.post(`${url}status`, { name: usuario }).then().catch(error => {
         console.log(`Impossível manter a conexão, erro: ${error.response.status}`)
     })
+}
+
+function selecionarDestinatario(elemento) {
+    destinatario = 'Todos';
+
+    const check = document.querySelector('.contato .selecionado')
+
+    if (check !== null) {
+        check.classList.remove('selecionado')
+    }
+    elemento.querySelector('ion-icon[name="checkmark"]').classList.add('selecionado')
+
+    destinatario = elemento.querySelector('div span').innerHTML
+
+}
+
+
+function abreFechaOverlay() {
+    const overlay = document.querySelector('.overlay')
+    overlay.classList.toggle('escondido')
+    usuariosAtivos();
+}
+
+function usuariosAtivos() {
+    const contatos = document.querySelector('.lista-contatos');
+    contatos.innerHTML = `<li class="contato">
+                    <div>
+                        <ion-icon name="people"></ion-icon>
+                        <span>Todos</span>
+                    </div>
+                    <ion-icon name="checkmark"></ion-icon>
+                </li>`
+
+    axios.get(`${url}participants`).then(response => {
+        response.data.map(user => {
+            contatos.innerHTML += `<li class="contato" onclick="selecionarDestinatario(this)">
+                    <div>
+                        <ion-icon name="person-circle"></ion-icon>
+                        <span>${user.name}</span>
+                    </div>
+                    <ion-icon name="checkmark"></ion-icon>
+                </li>`
+        })
+    }).catch(error => {
+        console.log(`Impossível fazer conexão com a API: ${error.response.status}`)
+    })
+}
+
+
+function selecionarVisibilidade(elemento) {
+
+    tipo = 'message';
+
+    const check = document.querySelector('.visibilidade .selecionado')
+
+    if (check !== null) {
+        check.classList.remove('selecionado')
+    }
+    elemento.querySelector('ion-icon[name="checkmark"]').classList.add('selecionado')
+
+    const visibilidade = elemento.querySelector('div span').innerHTML
+
+    if (visibilidade === 'Reservadamente') {
+        tipo = 'private_message'
+    }
+
+    console.log(tipo)
 }
 
 lerMensagens();
