@@ -17,14 +17,13 @@ function entrarNaSala() {
         }
     })
     usuario = name;
-
-    setInterval(lerMensagens, 3000);
-    setInterval(manterConexao, 5000)
 }
 
 function esconderInicial() {
     const entrada = document.querySelector('.entrada');
     entrada.classList.add('escondido');
+    const intervalMensagens = setInterval(lerMensagens, 3000);
+    const intervalConexao = setInterval(manterConexao, 5000);
 }
 
 function lerMensagens() {
@@ -155,13 +154,15 @@ function usuariosAtivos() {
 
     axios.get(`${url}participants`).then(response => {
         response.data.map(user => {
-            contatos.innerHTML += `<li class="contato" onclick="selecionarDestinatario(this)">
+            if (user.name !== usuario) {
+                contatos.innerHTML += `<li class="contato" onclick="selecionarDestinatario(this)">
                     <div>
                         <ion-icon name="person-circle"></ion-icon>
                         <span>${user.name}</span>
                     </div>
                     <ion-icon name="checkmark"></ion-icon>
                 </li>`
+            }
         })
     }).catch(error => {
         console.log(`Impossível fazer conexão com a API: ${error.response.status}`)
@@ -188,5 +189,14 @@ function selecionarVisibilidade(elemento) {
 
     console.log(tipo)
 }
+
+document.addEventListener('keyup', function (evento) {
+    const entrada = document.querySelector('.entrada .escondido')
+    if (evento.key === 'Enter') {
+        console.log(entrada)
+        entrarNaSala();
+    }
+}
+)
 
 lerMensagens();
