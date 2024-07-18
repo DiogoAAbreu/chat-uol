@@ -3,6 +3,7 @@ let mensagens;
 let usuario;
 let destinatario = 'Todos';
 let tipo = 'message';
+let ultimaMsg;
 
 function entrarNaSala() {
     usuario = '';
@@ -35,6 +36,13 @@ function lerMensagens() {
     });
 }
 
+function mostrarMsgPrivada(message) {
+    if (message.to === usuario || message.from === usuario) {
+        return true;
+    }
+    return false;
+}
+
 function renderizarMessages() {
     const chat = document.querySelector('.messages')
     chat.innerHTML = ''
@@ -53,7 +61,7 @@ function renderizarMessages() {
             </p>
         </li>`
             chat.innerHTML += elemento;
-        } else if (type === 'private_message') {
+        } else if (type === 'private_message' && mostrarMsgPrivada(message)) {
             const elemento = `<li class="message private_message">
             <p>
                 <span class="hora">(${time}) </span>
@@ -64,7 +72,7 @@ function renderizarMessages() {
             </p>
         </li>`
             chat.innerHTML += elemento;
-        } else {
+        } else if (type === 'message') {
 
             const elemento = `<li class="message">
                 <p>
@@ -78,6 +86,16 @@ function renderizarMessages() {
             chat.innerHTML += elemento;
         }
     })
+
+    const ultimaMensagem = mensagens[mensagens.length - 1].time
+    carregarUtilmaMensagem(ultimaMensagem);
+}
+
+function carregarUtilmaMensagem(ultimaMensagem) {
+    if (ultimaMensagem !== ultimaMsg) {
+        document.querySelector('.messages li:last-child').scrollIntoView();
+        ultimaMsg = ultimaMensagem;
+    }
 }
 
 function enviarMensagem() {
