@@ -191,10 +191,8 @@ function selecionarVisibilidade(elemento) {
 }
 
 document.addEventListener('keyup', function (evento) {
-    const entrada = document.querySelector('.entrada .escondido')
     if (evento.key === 'Enter') {
-        console.log(entrada)
-        entrarNaSala();
+        enviarMensagem();
     }
 }
 )
