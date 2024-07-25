@@ -195,6 +195,6 @@ document.addEventListener('keyup', function (evento) {
         enviarMensagem();
     }
 }
-)
+);
 
 lerMensagens();
